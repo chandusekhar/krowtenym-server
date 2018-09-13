@@ -1,0 +1,107 @@
+#!/usr/bin/env node
+
+var https = require('https');
+var fs = require('fs');
+
+var app = require('/app/www/mynetwork/root/src/app');
+var debug = require('/app/www/mynetwork/root/node_modules/debug')('root:server');
+var propertiesReader = require('/app/www/mynetwork/root/node_modules/properties-reader');
+var prop = propertiesReader('/app/www/configuration/mynetwork/mynetwork.properties');
+
+
+/**
+* Get port from environment and store in Express.
+*/
+
+var port = prop.get('HTTPS_PORT');
+var server_timeout = normalizePort(prop.get('SERVER_TIMEOUT') || '1800000');
+var credentials = { 
+  key : fs.readFileSync(prop.get('SSL_KEY')), 
+  cert : fs.readFileSync(prop.get('SSL_CERT')) 
+}
+
+var handler = function (req, res) {
+  res.header("Server",                           prop.get('HTTP_HEADER_SERVER'));
+  res.header("Access-Control-Allow-Origin",      prop.get('HTTP_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN'));
+  res.header("Access-Control-Allow-Credentials", prop.get('HTTP_HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS'));
+  res.header("Access-Control-Allow-Headers",     prop.get('HTTP_HEADER_ACCESS_CONTROL_ALLOW_HEADERS'));
+  res.header("Access-Control-Allow-Method",      prop.get('HTTP_HEADER_ACCESS_CONTROL_ALLOW_METHODS'));
+  res.header("Access-Control-Expose-Headers",    prop.get('HTTP_HEADER_ACCESS_CONTROL_EXPOSE_HEADERS'));
+  res.header("x-frame-options",                  prop.get('HTTP_HEADER_X_FRAME_OPTIONS'));
+  res.header("x-powered-by",                     prop.get('HTTP_HEADER_X_POWERED_BY'));
+  res.header("x-xss-protection",                 prop.get('HTTP_HEADER_X_XSS_PROTECTION'));
+  res.header("Cache-Control",                    prop.get('HTTP_HEADER_CACHE_CONTROL'));
+//  res.header("Content-Type",                     prop.get('HTTP_HEADER_CONTENT_TYPE'));
+  res.header("x-content-type",                   prop.get('HTTP_HEADER_X_CONTENT_TYPE_OPTIONS'));
+  res.header("Strict-Transport-Security",        prop.get('HTTP_HEADER_STRICT_TRANSPORT_SECURITY'));
+//  res.header("Content-Security-Policy",          prop.get('HTTP_HEADER_CONTENT_SECURITY_POLICY'));
+
+  console.log(JSON.stringify(req.headers));
+}
+
+app.set('httpsPort', port);
+var httpsServer = https.createServer(credentials, app);
+
+httpsServer.addListener("request", handler);
+httpsServer.setTimeout(parseInt(server_timeout, 10));
+httpsServer.listen(port);
+httpsServer.on('error', onErrorHttps);
+httpsServer.on('listening', onListeningHttps);
+
+/**
+* Normalize a port into a number, string, or false.
+*/
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+/**
+* Event listener for HTTP server "error" event.
+*/
+function onErrorHttps(error) {
+    if (error.syscall !== 'listen') {
+      throw error;
+    }
+  
+    var bind = typeof port === 'string'
+      ? 'Pipe ' + port
+      : 'Port ' + port;
+  
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+      case 'EACCES':
+        console.error(bind + ' requires elevated privileges');
+        process.exit(1);
+        break;
+      case 'EADDRINUSE':
+        console.error(bind + ' is already in use');
+        process.exit(1);
+        break;
+      default:
+        throw error;
+    }
+  }
+
+/**
+* Event listener for HTTP server "listening" event.
+*/
+function onListeningHttps() {
+    var addr = httpsServer.address();
+    var bind = typeof addr === 'string'
+      ? 'pipe ' + addr
+      : 'port ' + addr.httpsPort;
+    debug('Listening on ' + bind);
+  }
+

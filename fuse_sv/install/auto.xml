@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AutomatedInstallation langpack="eng">
+<productName>EAP</productName>
+<productVersion>6.4.0</productVersion>
+<com.izforge.izpack.panels.HTMLLicencePanel id="HTMLLicencePanel"/>
+<com.izforge.izpack.panels.TargetPanel id="DirectoryPanel">
+<installpath>/opt/EAP-6.4.0</installpath>
+</com.izforge.izpack.panels.TargetPanel>
+<com.izforge.izpack.panels.TreePacksPanel id="TreePacksPanel">
+<pack index="0" name="Red Hat JBoss Enterprise Application Platform" selected="true"/>
+<pack index="1" name="AppClient" selected="true"/>
+<pack index="2" name="Bin" selected="true"/>
+<pack index="3" name="Bundles" selected="true"/>
+<pack index="4" name="XMLs and XSDs" selected="true"/>
+<pack index="5" name="Domain" selected="true"/>
+<pack index="6" name="Domain Shell Scripts" selected="true"/>
+<pack index="7" name="Modules" selected="true"/>
+<pack index="8" name="Standalone" selected="true"/>
+<pack index="9" name="Standalone Shell Scripts" selected="true"/>
+<pack index="10" name="Welcome Content" selected="true"/>
+<pack index="11" name="Quickstarts" selected="false"/>
+</com.izforge.izpack.panels.TreePacksPanel>
+<com.izforge.izpack.panels.UserInputPanel id="CreateUserPanel">
+<userInput>
+<entry key="adminUser" value="admin"/>
+<entry key="adminPassword" autoPrompt="true"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.izforge.izpack.panels.UserInputPanel id="QuickStartsPanel">
+<userInput>
+<entry key="installQuickStarts" value="false"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.redhat.installer.installation.maven.panel.MavenRepoCheckPanel id="MavenRepoCheckPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketBindingPanel">
+<userInput>
+<entry key="portDecision" value="false"/>
+<entry key="pureIPv6" value="false"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.izforge.izpack.panels.UserInputPanel id="SocketStandalonePanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketHaStandalonePanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketFullStandalonePanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketFullHaStandalonePanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="HostDomainPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketDomainPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketHaDomainPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketFullDomainPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketFullHaDomainPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="ServerLaunchPanel">
+<userInput>
+<entry key="serverStartup" value="standalone"/>
+<entry key="browserStartup" value="false"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.izforge.izpack.panels.UserInputPanel id="LoggingOptionsPanel">
+<userInput>
+<entry key="configureLog" value="false"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.izforge.izpack.panels.UserInputPanel id="postinstall">
+<userInput>
+<entry key="postinstallServer" value="true"/>
+<entry key="installVault" value="false"/>
+<entry key="installSsl" value="false"/>
+<entry key="installLdap" value="false"/>
+<entry key="installInfinispan" value="false"/>
+<entry key="installSecurityDomain" value="false"/>
+<entry key="jdbc.driver.install" value="true"/>
+<entry key="datasource.install" value="true"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.izforge.izpack.panels.UserInputPanel id="vaultsecurity"/>
+<com.izforge.izpack.panels.UserInputPanel id="sslsecurity"/>
+<com.izforge.izpack.panels.UserInputPanel id="ldapsecurity"/>
+<com.izforge.izpack.panels.UserInputPanel id="ldapsecurity2"/>
+<com.izforge.izpack.panels.UserInputPanel id="infinispan"/>
+<com.redhat.installer.asconfiguration.securitydomain.panel.SecurityDomainPanel id="Security Domain Panel"/>
+<com.izforge.izpack.panels.UserInputPanel id="jsssecuritydomain"/>
+<com.redhat.installer.asconfiguration.jdbc.panel.JBossJDBCDriverSetupPanel id="JDBC Setup Panel">
+<jdbc.driver.jar>
+<path-1>/opt/install/postgresql-42.1.4.jar</path-1>
+</jdbc.driver.jar>
+<jdbc.driver.name>postgresql</jdbc.driver.name>
+<jdbc.driver.module.name>org.postgresql</jdbc.driver.module.name>
+<jdbc.driver.xa.class>org.postgresql.xa.PGXADataSource</jdbc.driver.xa.class>
+<jdbc.driver.dir.struct>modules/org/postgresql/main</jdbc.driver.dir.struct>
+<db.driver>postgresql</db.driver>
+<db.dialect>PostgreSQLDialect</db.dialect>
+</com.redhat.installer.asconfiguration.jdbc.panel.JBossJDBCDriverSetupPanel>
+<com.redhat.installer.asconfiguration.datasource.panel.JBossDatasourceConfigPanel id="Datasource Configuration Panel">
+<jdbc.datasource.name>MyNetworkDS</jdbc.datasource.name>
+<jdbc.datasource.jndiname>java:jboss/MyNetworkDS</jdbc.datasource.jndiname>
+<jdbc.datasource.minpoolsize>0</jdbc.datasource.minpoolsize>
+<jdbc.datasource.maxpoolsize>20</jdbc.datasource.maxpoolsize>
+<jdbc.datasource.issecuritydomain>false</jdbc.datasource.issecuritydomain>
+<jdbc.datasource.username>mynwadm</jdbc.datasource.username>
+<jdbc.datasource.password autoPrompt="true"/>
+<jdbc.datasource.datasourcetype>false</jdbc.datasource.datasourcetype>
+<jdbc.datasource.connectionurl>jdbc:postgresql://postgres_sv:5432/mynetworkadm?currentSchema=mynetwork</jdbc.datasource.connectionurl>
+</com.redhat.installer.asconfiguration.datasource.panel.JBossDatasourceConfigPanel>
+<com.izforge.izpack.panels.SummaryPanel id="SummaryPanel"/>
+<com.izforge.izpack.panels.InstallPanel id="InstallPanel"/>
+<com.izforge.izpack.panels.ProcessPanel id="ProcessPanel"/>
+<com.izforge.izpack.panels.ShortcutPanel id="ShortcutPanel"/>
+<com.izforge.izpack.panels.FinishPanel id="FinishPanel"/>
+</AutomatedInstallation>

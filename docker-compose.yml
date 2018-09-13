@@ -1,0 +1,106 @@
+version: "3"
+services:
+##########NGINX_ZONE##########
+  nginx_sv:
+    build: 
+      context: ./nginx_sv
+      args:
+        proxy: "http://proxya.ais.co.th:2520"
+    ports:
+      - 7443:4200
+      - 6444:443
+      - 443:6443
+      - 9990:6090
+      - 6190:6190
+      - 9999:6099
+      - 6199:6199
+      - 8080:6080
+      - 6180:6180
+      - 5432:5432
+    links:
+      - angular_banana
+      - node_banana
+      # - node_papaya
+    volumes:
+      - ./nginx_sv/conf:/root/conf
+
+##########NEW_UI_ZONE##########
+  angular_banana:
+    privileged: true
+    build:
+      context: ./angular_sv
+      args:
+        proxy: "http://proxya.ais.co.th:2520"
+        backend_service_name: "_node_banana"
+    ports:
+      - 4200
+    links:
+      - _node_banana
+    volumes:
+      - ./angular_sv/script:/app/script
+      - ~/git/node:/app/source
+
+  _node_banana:
+    privileged: true
+    build:
+      context: ./_node_sv
+      args:
+        proxy: "http://proxya.ais.co.th:2520"
+        backend_address: "172.16.34.35"
+        backend_service_name: "fuse_banana"
+    ports:
+      - 3000
+    links:
+      - fuse_banana
+    volumes:
+      - ./_node_sv/script:/app/script
+      - ~/git/node:/app/source
+
+##########NODE_ZONE##########
+  node_banana:
+    privileged: true
+    build: 
+      context: ./node_sv
+      args:
+        proxy: "http://proxya.ais.co.th:2520"
+        fuse_dev_ip: "172.16.34.35"
+        fuse_name: "fuse_banana"
+    ports:
+      - 443
+    links: 
+      - fuse_banana
+    volumes: 
+      - ./node_sv/app/banana/app:/app
+      - ~/fs_ambstorage1b/vol/SHT_MyNetwork:/fs_ambstorage1b/vol/SHT_MyNetwork/
+
+##########FUSE_ZONE##########
+  fuse_banana:
+    build:
+      context: ./fuse_sv
+      args:
+        proxy: "http://proxya.ais.co.th:2520"
+    ports:
+      - 9990
+      - 9999
+      - 8080
+    extra_hosts:
+      - "test-omws.ais.co.th:10.252.164.30"
+      - "dblogintest.ais.co.th:10.252.66.27"
+    links: 
+      - postgres_sv
+    volumes:
+      - ./fuse_sv/install/configuration:/app/www/configuration
+      - ./fuse_sv/install/jboss-cli:/opt/jboss-cli
+      - ./fuse_sv/log/banana:/opt/EAP-6.4.0/standalone/log
+      - ~/fs_ambstorage1b/vol/SHT_MyNetwork:/fs_ambstorage1b/vol/SHT_MyNetwork/
+
+##########POSTGRES_ZONE##########      
+  postgres_sv:
+    build: 
+      context: ./postgres_sv
+      args:
+        proxy: "http://proxya.ais.co.th:2520"
+    ports:
+      - 5432
+    volumes: 
+      - ./postgres_sv/pgdata:/var/lib/postgresql/data

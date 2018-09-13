@@ -1,0 +1,122 @@
+connect
+
+####Data Source####
+data-source add --name=MyNetworkReportDS \
+--jndi-name=java:jboss/MyNetworkReportDS \ 
+--driver-name=postgresql \
+--connection-url=jdbc:postgresql://postgres_sv:5432/mynetworkadm?currentSchema=mynetwork \ 
+--user-name=mynwadm \
+--password=welcome1 \
+--validate-on-match=true \ 
+--background-validation=false \
+--valid-connection-checker-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker \ 
+--exception-sorter-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter
+data-source enable --name=MyNetworkReportDS
+
+####System Property######
+/system-property=mynetwork.global.email.host.ip:add(value="10.138.46.227")
+/system-property=org.jboss.security.ignoreHttpsHost:add(value="true")
+/system-property=mynetwork.global.datasource.core-network:add(value="jboss/CoreNetworkDS")
+/system-property=mynetwork.global.datasource.device-master:add(value="jboss/DeviceMasterDS")
+/system-property=mynetwork.global.datasource.name:add(value="jboss/MyNetworkDS")
+/system-property=mynetwork.global.datasource.oracle.report.name:add(value="jboss/TTSDS")
+/system-property=mynetwork.global.datasource.report.name:add(value="jboss/MyNetworkReportDS")
+/system-property=mynetwork.global.datasource.schema.report.name:add(value="jboss/MyNetworkSchemaReportDS")
+/system-property=mynetwork.global.datasource.schema.sap.name:add(value="jboss/MyNetworkSchemaSAPDS")
+/system-property=mynetwork.global.datasource.transaction.schema.report.name:add(value="jboss/MyNetworkSchemaTransactionReportDS")
+/system-property=mynetwork.global.error_code.business_exception:add(value="300")
+/system-property=mynetwork.global.error_code.business_exception_login_fail:add(value="302")
+/system-property=mynetwork.global.error_code.business_exception_login_role_not_found:add(value="303")
+/system-property=mynetwork.global.error_code.business_exception_validation:add(value="301")
+/system-property=mynetwork.global.error_code.data_not_found:add(value="200")
+/system-property=mynetwork.global.error_code.data_not_found_report_as_of:add(value="201")
+/system-property=mynetwork.global.error_code.system_error:add(value="100")
+/system-property=mynetwork.global.error_message.business_exception:add(value="Business Exception - [%msg1]")
+/system-property=mynetwork.global.error_message.business_exception_login_fail:add(value="Business Exception - [login fail]")
+/system-property=mynetwork.global.error_message.business_exception_login_user_not_role:add(value="Business Exception - [user or role does not exist]")
+/system-property=mynetwork.global.error_message.business_exception_validation:add(value="Business Exception Validation - [%msg1][%msg2]")
+/system-property=mynetwork.global.error_message.data_not_authorize:add(value="Data Not Authorize")
+/system-property=mynetwork.global.error_message.data_not_found:add(value="Data not found")
+/system-property=mynetwork.global.error_message.data_not_found_report_as_of:add(value="Data not found report as of")
+/system-property=mynetwork.global.error_message.system_error:add(value="System Error - [%msg1]")
+/system-property=mynetwork.global.flag_mail:add(value="true")
+/system-property=mynetwork.global.host.ip:add(value="localhost")
+/system-property=mynetwork.global.host.port:add(value="8080")
+/system-property=mynetwork.global.log.configmanagement.level:add(value="INFO")
+/system-property=mynetwork.global.log.configmanagement.level.db:add(value="INFO")
+/system-property=mynetwork.global.log.configmanagement.path:add(value="/app/log/mynetwork/config/config-management.log")
+/system-property=mynetwork.global.log.configmanagement.path.db:add(value="/app/log/mynetwork/config/config-management_db.log")
+/system-property=mynetwork.global.log.core_network.path:add(value="/app/jboss/log/fuse/core-network/basic_fix_line.log")
+/system-property=mynetwork.global.log.pattern:add(value="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c]:%L - %m%n")
+/system-property=mynetwork.global.log.report.actm.path:add(value="/app/jboss/log/fuse/report/rp_actm.log")
+/system-property=mynetwork.global.log.report.level:add(value="INFO")
+/system-property=mynetwork.global.log.report.pending_pr.path:add(value="/app/jboss/log/fuse/report/rp_pending_pr.log")
+/system-property=mynetwork.global.log.report.pending_pre_pr_capex_type_y.path:add(value="/app/jboss/log/fuse/report/rp_pending_pre_pr_capex_type_y.log")
+/system-property=mynetwork.global.log.report.po_os_capex_y.path:add(value="/app/jboss/log/fuse/report/rp_po_os_capex_y.log")
+/system-property=mynetwork.global.log.report.telecom_asset.path:add(value="/app/jboss/log/fuse/report/rp_telecom_asset.log")
+/system-property=mynetwork.global.log.service.master_data_management.path:add(value="/app/log/mynetwork/master/masterdata-management_db.log")
+/system-property=mynetwork.global.log.service.menu_management.path:add(value="/app/jboss/log/fuse/service/menu_management.log")
+/system-property=mynetwork.global.log.service.notification_management.path:add(value="/app/jboss/log/fuse/report/notification_management.log")
+/system-property=mynetwork.global.log.sessionmanagement.level:add(value="INFO")
+/system-property=mynetwork.global.log.sessionmanagement.path:add(value="/app/log/mynetwork/session/session.log")
+/system-property=mynetwork.global.log.sessionmanagement.path.db:add(value="/app/log/mynetwork/session/session_db.log")
+/system-property=mynetwork.global.mail_admin_to:add(value="kattikap@corp.ais900dev.org")
+/system-property=mynetwork.global.mail_port:add(value="25")
+/system-property=mynetwork.global.mail_server:add(value="intsmtp.corp.ais900dev.org")
+/system-property=mynetwork.global.otp-flag:add(value="false")
+/system-property=mynetwork.legacy.dblogin.projectcode:add(value="MYNW2OMTST")
+/system-property=mynetwork.legacy.dblogin.timeout:add(value="5000")
+/system-property=mynetwork.legacy.dblogin.uri:add(value="http://dblogintest.ais.co.th/wsAuthenDB/webDBconfigService.asmx")
+/system-property=mynetwork.legacy.gsso.timeout:add(value="5000")
+/system-property=mynetwork.legacy.gsso.uri:add(value="https://10.252.176.182:8088/GSSO-SSO/GssoSsoWeb?wsdl")
+/system-property=mynetwork.legacy.master.plan.timeout:add(value="60000")
+/system-property=mynetwork.legacy.master.plan.uri:add(value="http://10.138.47.191:5000")
+/system-property=mynetwork.legacy.omws.domain:add(value="")
+/system-property=mynetwork.legacy.omws.omcode:add(value="OMTESTMYNETWORK")
+/system-property=mynetwork.legacy.omws.password:add(value="")
+/system-property=mynetwork.legacy.omws.timeout:add(value="5000")
+/system-property=mynetwork.legacy.omws.uri:add(value="https://test-omws.ais.co.th/omws/api/WS_OM_OMService.svc")
+/system-property=mynetwork.legacy.omws.username:add(value="")
+/system-property=mynetwork.legacy.sap.aam.timeout:add(value="60000")
+/system-property=mynetwork.legacy.sap.aam.uri:add(value="http://10.216.141.186:8080/SAPGateway/services/IgwInterfaceWsService")
+/system-property=mynetwork.legacy.switchman.uri:add(value="http://10.216.148.223:443/SwitchmanCorpE1/rest/service/")
+/system-property=mynetwork.log.global.pattern:add(value="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] %-5p [%c]:%L - %m%n")
+/system-property=mynetwork.log.planning.master.budget.level.db:add(value="INFO")
+/system-property=mynetwork.log.planning.master.budget.level.function:add(value="INFO")
+/system-property=mynetwork.log.planning.master.budget.level.transaction:add(value="INFO")
+/system-property=mynetwork.log.planning.master.budget.path:add(value="/app/log/mynetwork/planning/master/budget")
+/system-property=mynetwork.log.planning.master.project.level.db:add(value="INFO")
+/system-property=mynetwork.log.planning.master.project.level.function:add(value="INFO")
+/system-property=mynetwork.log.planning.master.project.level.transaction:add(value="INFO")
+/system-property=mynetwork.log.planning.master.project.path:add(value="/app/log/mynetwork/planning/master/project")
+/system-property=mynetwork.log.workflow.level.db:add(value="INFO")
+/system-property=mynetwork.log.workflow.level.function:add(value="INFO")
+/system-property=mynetwork.log.workflow.level.transaction:add(value="INFO")
+/system-property=mynetwork.log.workflow.path:add(value="/app/log/mynetwork/workflow")
+/system-property=mynetwork.schedule.planning.mail_summary_pre_pr_complete:add(value="0 0 17 1/1 * ? *")
+/system-property=mynetwork.schedule.planning.mail_summary_pre_pr_purchasing:add(value="0 0 12 26 4 ? *")
+/system-property=mynetwork.schedule.planning.mappingPrePR:add(value="0 0 0/1 1/1 * ? *")
+/system-property=mynetwork.schedule.planning.resubmitPrePRToSAP:add(value="0 0 0/1 1/1 * ? *")
+/system-property=mynetwork.service.otp.otp-channel:add(value="all")
+
+
+####Modules######
+module add --name=com.google.code.gson.gson --resources=./gson-2.8.2.jar
+module add --name=javax.naming.jndi --resources=./jndi-1.2.1.jar 
+module add --name=postgresql.postgresql --resources=./postgresql-9.4.1208-jdbc42-atlassian-hosted.jar
+module add --name=th.co.ais.mynetwork.module.utilities --resources=./utilities-1.0.0.jar --dependencies=org.jboss.logging,postgresql.postgresql,javax.api,org.jboss.as.naming,,com.google.code.gson.gson
+module add --name=org.apache.poi.poi --resources=./poi-3.17.jar
+module add --name=org.apache.poi.poi-ooxml --resources=./poi-ooxml-3.17.jar --dependencies=org.apache.poi.poi,org.apache.xmlbeans.xmlbeans,org.apache.commons.commons-collections4,org.apache.poi.poi-ooxml-schemas,javax.api
+module add --name=org.apache.poi.poi-ooxml-schemas --resources=./poi-ooxml-schemas-3.17.jar --dependencies=org.apache.xmlbeans.xmlbeans,org.apache.poi.poi-ooxml,javax.api
+module add --name=org.apache.commons.commons-collections4 --resources=./commons-collections4-4.1.jar
+module add --name=org.apache.xmlbeans.xmlbeans --resources=./xmlbeans-2.6.0.jar --dependencies=javax.apis
+
+/subsystem=ee:write-attribute(name=global-modules ,value=[  \
+{"name"=>"com.google.code.gson.gson","slot"=>"main"},  \
+{"name"=>"postgresql.postgresql","slot"=>"main"}, \
+{"name"=>"th.co.ais.mynetwork.module.utilities","slot"=>"main"}, \
+{"name"=>"org.apache.poi.poi","slot"=>"main"}, \
+{"name"=>"org.apache.poi.poi-ooxml","slot"=>"main"}, \
+{"name"=>"org.apache.poi.poi-ooxml-schemas","slot"=>"main"} ])
+
+quit

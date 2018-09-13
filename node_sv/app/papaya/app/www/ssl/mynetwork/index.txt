@@ -1,0 +1,1 @@
+V	180929093829Z		00	unknown	/C=TH/ST=Bangkok/L=Phayathai/O=Advanced Info Service PLC./OU=TSSD/ISS/CN=10.137.16.128 

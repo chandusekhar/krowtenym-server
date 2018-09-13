@@ -1,0 +1,52 @@
+## Url : Angular -> NodeJS
+ROLE_MANAGEMENT=/roleManagement/
+MENU_MANAGEMENT=/menuManagement/
+USER_MANAGEMENT=/usermanagement/
+CONFIG_MANAGEMENT=/configManagement/
+FILE=/file/
+
+LOGIN=/login
+LOGIN_CALLBACK=/callback
+LOGOUT=/logout
+CHECK_OTP=/checkOtp
+GET_OTP=/getOtp
+CHECK_LOGIN_STATUS=/checkLoginStatus
+GET_PROFILE=getProfile
+GET_DATA_OPERATION=/getData/:operation
+GET_MENU_LIST=/getMenuList
+GET_CONFIG=getConfig
+UPLOAD_FILE=/upload
+GET_USER_MANUAL=/getUserManual
+LOG_ACCESS=/logAccess
+GET_SESSION_ONLINE=/getSessionOnline
+GET_USER_ONLINE_INTERVAL_TIME=/getUserOnlineIntervalTime
+DELETE_FILE_TEMP=/deleteFileTemp
+DELETE_FILE_NAS=/deleteFileNas
+
+## FuseUrl : NodeJS -> Fuse
+FUSE_USER_MANAGEMENT=UserManagement/
+FUSE_MENU_MANAGEMENT=MenuManagement/
+FUSE_SESSION_MANAGEMENT=SessionManagement/
+FUSE_OTP=OTP/
+## User Management
+FUSE_AUTHENTICATION=authentication
+## Menu Management
+FUSE_GET_MENU_LIST=getMenuList
+## Config Management
+FUSE_GET_CONFIG=http://172.16.34.35:8080/mynetwork/utility/config-management/getConfig
+FUSE_GET_CONFIG_MASTER_DETAIL=http://172.16.34.35:8080/mynetwork/utility/config-management/getConfigMasterDetail
+FUSE_GET_CONFIG_LOOKUP=http://172.16.34.35:8080/mynetwork/utility/config-management/getConfigLookup
+## Session Management
+FUSE_START_SESSION=startSession
+FUSE_DESTROY_SESSION=destroySession
+FUSE_LAST_SESSION=lastSession
+FUSE_GET_SESSION_ONLINE=getSessionOnline
+FUSE_LOG_ACCESS=logAccess
+## OTP
+FUSE_GET_OTP=getOTP
+FUSE_CONFIRM_OTP=confirmOTP
+## 
+FUSE_UPLOAD_FILE=http://172.16.34.35:8080/mynetwork/service/file/upload
+FUSE_DELETE_FILE=http://172.16.34.35:8080/mynetwork/service/file/delete
+FUSE_DOWNLOAD_FILE=http://172.16.34.35:8080/mynetwork/service/file/download
+FUSE_COPY_FILE=http://172.16.34.35:8080/mynetwork/service/file/copy
